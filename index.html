@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashley's Portfolio</title>
+    <style>
+
+        html {
+          scroll-behavior: smooth;
+          scroll-padding-top: 80px; 
+        }
+
+        body {
+           margin: 0;
+             padding: 0;
+        }
+
+        section {
+           padding-top: 80px; 
+             padding-bottom: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .lightbox .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            color: white;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+       
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: #34495e;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.8em;
+            color: #ecf0f1;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+            margin: 0;
+            justify-content: center; 
+            flex-grow: 1; 
+        }
+
+        .nav-links li a {
+            color: #ecf0f1;
+            font-size: 1.1em;
+            padding: 10px;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-links li a:hover {
+            color: #f39c12;
+        }
+
+        
+        .menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #34495e;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                text-align: center;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.8em;
+                color: #ecf0f1;
+                cursor: pointer;
+            }
+        }
+
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding: 20px;
+            max-width: 50%;
+        }
+
+        .hero h1 {
+            font-size: 3.2em;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+        }
+
+        .hero .btn {
+            background-color: #f39c12;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .hero .btn:hover {
+            background-color: #e67e22;
+        }
+
+      
+        .hero-image {
+            flex: 1;
+            max-width: 45%;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+       
+        #about {
+            background-color: #ecf0f1;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        #about .about-content {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #about img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        #about p {
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        
+        #skills {
+            padding: 60px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .skills-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .skill {
+            background-color: #f39c12;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .skill:hover {
+            background-color: #e67e22;
+        }
+
+        
+        #projects {
+            padding: 60px 20px;
+            background-color: #f4f4f4;
+        }
+
+        .projects-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .project-card h3 {
+            font-size: 1.2em;
+            margin-top: 15px;
+        }
+
+        
+        #contact {
+            padding: 60px 20px;
+            background-color: blue;
+            color: white;
+            text-align: center;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            flex: 1;
+            font-size: 1.2em;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .contact-form button {
+            padding: 12px 25px;
+            background-color: #f39c12;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #e67e22;
+        }
+
+       
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #about .about-content,
+        #skills .skills-container,
+        #projects .projects-container,
+        #contact .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+       
+        #about .about-content {
+            max-width: 900px;
+        }
+
+        #skills .skills-container {
+            max-width: 1200px;
+        }
+
+        #projects .projects-container {
+            max-width: 1200px;
+        }
+
+        #contact .contact-container {
+            max-width: 1000px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="logo">Ashley</div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+   
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Hello, I'm <span>Ashley</span></h1>
+                <p>Aspiring Web Developer | Passionate About Technology</p>
+                <a href="https://www.facebook.com/ashley.javinez.159586" target="_blank" class="btn">Facebook</a>
+            </div>
+            <div class="hero-image">
+                <img src="ash.jpg" alt="Ashley Image">
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+       
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <img src="ash.jpg" alt="Profile Picture">
+                <p><strong>Ashley Mari D. Javinez</strong></p>
+                <p>Highly motivated and detail-oriented with a passion for innovative technologies. Proficient in C++ and JavaScript, with strong problem-solving skills, and excellent communication and teamwork abilities.</p>
+                <p>Web Developer | Problem Solver | Tech Enthusiast</p>
+            </div>
+        </section>
+
+       
+        <section id="skills">
+            <h2>My Skills</h2>
+            <div class="skills-container">
+                <div class="skill">HTML</div>
+                <div class="skill">CSS</div>
+                <div class="skill">C++</div>
+                <div class="skill">JavaScript</div>
+            </div>
+        </section>
+
+        
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <a href="javascript:void(0);" onclick="openLightbox('project1.jpg')">
+                        <img src="project1.jpg" alt="Project 1">
+                    </a>
+                    <h3>CRUD App</h3>
+                    <p>A simple CRUD (Create, Read, Update, Delete) web application.</p>
+                </div>
+                <div class="project-card">
+                    <a href="javascript:void(0);" onclick="openLightbox('project2.jpg')">
+                        <img src="project2.jpg" alt="Project 2">
+                    </a>
+                    <h3>Login & Dashboard</h3>
+                    <p>This is my Project in C++.</p>
+                </div>
+            </div>
+        </section>
+
+       
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p><strong>Email:</strong> AleyJavinez@gmail.com</p>
+                    <p><strong>Phone:</strong> +63 924090820</p>
+                    <p><strong>Address:</strong> Victoria Reyes, Dasmariñas City Cavite, Philippines</p>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+
+            
+            <div class="lightbox" onclick="closeLightbox()">
+                <button class="close-btn" onclick="closeLightbox()">X</button>
+                <img id="lightbox-img" src="" alt="Full Image">
+            </div>        
+        </section>
+    </div>
+
+    <script>
+       
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('show');
+        }
+
+        
+        function openLightbox(imageSrc) {
+            document.getElementById('lightbox-img').src = imageSrc;
+            document.querySelector('.lightbox').style.display = 'flex'; // Show the lightbox
+        }
+
+        
+        function closeLightbox() {
+            document.querySelector('.lightbox').style.display = 'none'; // Hide the lightbox
+        }
+    </script>
+</body>
+</html>
